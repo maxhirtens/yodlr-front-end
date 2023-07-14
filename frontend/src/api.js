@@ -3,7 +3,7 @@ import axios from "axios";
 // const BASE_URL =
 //   "https://maxhirtens-react-jobly.onrender.com" || "http://localhost:3001";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "http://localhost:3001";
 
 /** API Class.
  *
@@ -20,23 +20,13 @@ class YodlrApi {
   static async request(endpoint) {
     const url = `${BASE_URL}/${endpoint}`;
 
-    const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-      },
-    };
-
-    let res = await axios.get(url, config);
-    console.log(res);
-
-    // try {
-    //   return await axios.get(url);
-    // } catch (err) {
-    //   console.error("API Error:", err.response);
-    //   let message = err.response.data.error.message;
-    //   throw Array.isArray(message) ? message : [message];
-    // }
+    try {
+      return await axios.get(url);
+    } catch (err) {
+      console.error("API Error:", err.response);
+      let message = err.response.data.error.message;
+      throw Array.isArray(message) ? message : [message];
+    }
   }
 
   // Individual API routes
@@ -44,7 +34,7 @@ class YodlrApi {
   // Get all users.
   static async getUsers() {
     let res = await this.request("users", {});
-    return res.users;
+    return res.data;
   }
 
   // sign up.
