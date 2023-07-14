@@ -17,11 +17,11 @@ class YodlrApi {
   // the token for interactive with the API will be stored here.
   static token;
 
-  static async request(endpoint) {
+  static async request(endpoint, method = "get", data) {
     const url = `${BASE_URL}/${endpoint}`;
 
     try {
-      return await axios.get(url);
+      return await axios({ url, method, data });
     } catch (err) {
       console.error("API Error:", err.response);
       let message = err.response.data.error.message;
@@ -33,14 +33,15 @@ class YodlrApi {
 
   // Get all users.
   static async getUsers() {
-    let res = await this.request("users", {});
+    let res = await this.request("users");
     return res.data;
   }
 
   // sign up.
   static async signup(data) {
-    let res = await this.request(`auth/register`, data, "post");
-    return res.token;
+    let res = await this.request(`users`, "post", data);
+    console.log(res.data);
+    return res.data;
   }
 
   // update user profile.

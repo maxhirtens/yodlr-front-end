@@ -37,6 +37,10 @@
   }
 }
 
-ul{
+ul {
   list-style: none;
+}
+
+.form-group .form-control {
+  margin: 10px;
 }
