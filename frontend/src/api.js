@@ -46,7 +46,7 @@ class YodlrApi {
 
   // update user profile.
   static async saveProfile(username, data) {
-    let res = await this.request(`users/${username}`, data, "patch");
+    let res = await this.request(`users/${username}`, "patch", data);
     return res.user;
   }
 }
